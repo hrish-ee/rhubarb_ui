@@ -11,3 +11,4 @@ dash-mantine-components==0.11.1
 dash[diskcache] == 2.8.1
 dash-iconify==0.1.2
 dash-cytoscape==0.3.0
+
