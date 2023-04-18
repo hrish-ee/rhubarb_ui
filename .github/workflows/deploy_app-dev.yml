@@ -1,0 +1,15 @@
+---
+name: Deploy app-dev
+
+on:
+  push:
+    branches:
+      - "app-dev"
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/acr_deploy_reusable.yml
+    name: Deploy app-dev
+    with:
+      environment: app-dev
+    secrets: inherit
