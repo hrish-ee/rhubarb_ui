@@ -1,0 +1,15 @@
+---
+name: Deploy sandbox
+
+on:
+  push:
+    branches:
+      - "sandbox"
+
+jobs:
+  deploy:
+    uses: ./.github/workflows/acr_deploy_reusable.yml
+    name: Deploy sandbox
+    with:
+      environment: sandbox
+    secrets: inherit
