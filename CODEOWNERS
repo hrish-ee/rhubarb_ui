@@ -1,0 +1,3 @@
+# Owners for branch protection
+# Users within this team are required reviewers for this deployment branch
+*       @hrish-ee/rhubarb_ui-owners
