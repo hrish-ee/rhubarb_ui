@@ -23,9 +23,7 @@ import pandas as pd
 import plotly.express as px
 
 
-app = Dash(__name__)
-server = app.server
-environment = os.environ.get("ENVIRONMENT", default="dev")
+environment = os.environ.get("ENVIRONMENT", default="sandbox")
 
 
 app = Dash(
