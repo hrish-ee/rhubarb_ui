@@ -103,6 +103,6 @@ def layout() -> dash.html.Div:
     return html.Div(
         children=[
             body,
-            debug_inspector,
+            # debug_inspector,
         ]
     )
