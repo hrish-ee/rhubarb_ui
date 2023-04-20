@@ -12,18 +12,10 @@
 #  See the License for the specific language governing permissions and
 #  limitations under the License.
 
-import os
-from dash import Dash, page_registry, html, dcc
-from typing import Any
+from dash import Dash, page_registry
 from layout.appshell import create_appshell
-from azure.cosmos import CosmosClient
-from azure.identity import DefaultAzureCredential
-import pyodbc
-import pandas as pd
-import plotly.express as px
+from databases import odbc_cursor, cosmos_client
 
-
-environment = os.environ.get("ENVIRONMENT", default="sandbox")
 
 
 app = Dash(
@@ -49,38 +41,6 @@ app.config.suppress_callback_exceptions = True
 app.layout = create_appshell([page_registry.values()])
 
 server = app.server
-
-
-def odbc_cursor() -> Any:
-    """
-    ODBC cursor for running queries against the MSSQL feature store.
-
-    Documentation: https://github.com/mkleehammer/pyodbc/wiki
-    """
-
-    connection = pyodbc.connect(os.environ["FEATURE_STORE_CONNECTION_STRING"])
-    return connection.cursor()
-
-
-def cosmos_client() -> "CosmosClient":
-    """
-    CosmosDB client for connecting with the state store.
-
-    Documentation:
-    https://learn.microsoft.com/en-us/azure/cosmos-db/nosql/sdk-python
-    """
-
-    client = CosmosClient(
-        os.environ["COSMOSDB_ENDPOINT"],
-        credential=(
-            DefaultAzureCredential()
-            if environment != "local"
-            else os.environ["COSMOSDB_KEY"]
-        ),
-        connection_verify=(environment != "local"),
-    )
-    return client
-
 
 if __name__ == "__main__":
     app.run_server(host="0.0.0.0", port=8000, debug=(environment == "local"))

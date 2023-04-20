@@ -7,7 +7,6 @@ import ids
 
 from pages.discharges import CAMPUSES
 
-import pages.discharges.callbacks  # noqa
 
 dash.register_page(__name__, path="/discharges", name="Discharges")
 
